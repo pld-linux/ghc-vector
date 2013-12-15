@@ -15,17 +15,32 @@ Source0:	http://hackage.haskell.org/package/%{pkgname}-%{version}/%{pkgname}-%{v
 # Source0-md5:	a0d48ebfe68c8b90cb1d09589d86a79c
 URL:		http://hackage.haskell.org/package/vector
 BuildRequires:	ghc >= 6.12.3
+BuildRequires:	ghc-base >= 4
+BuildRequires:	ghc-base < 5
+BuildRequires:	ghc-deepseq >= 1.1
+BuildRequires:	ghc-deepseq < 1.4
+BuildRequires:	ghc-ghc-prim
 BuildRequires:	ghc-primitive < 0.6
 BuildRequires:	ghc-primitive >= 0.5.0.1
 %if %{with prof}
 BuildRequires:	ghc-prof >= 6.12.3
+BuildRequires:	ghc-base-prof >= 4
+BuildRequires:	ghc-base-prof < 5
+BuildRequires:	ghc-deepseq-prof >= 1.1
+BuildRequires:	ghc-deepseq-prof < 1.4
+BuildRequires:	ghc-ghc-prim-prof
 BuildRequires:	ghc-primitive-prof < 0.6
 BuildRequires:	ghc-primitive-prof >= 0.5.0.1
 %endif
 BuildRequires:	rpmbuild(macros) >= 1.608
 %requires_eq	ghc
-BuildRequires:	ghc-primitive < 0.6
-BuildRequires:	ghc-primitive >= 0.5.0.1
+Requires:	ghc-base >= 4
+Requires:	ghc-base < 5
+Requires:	ghc-deepseq >= 1.1
+Requires:	ghc-deepseq < 1.4
+Requires:	ghc-ghc-prim
+Requires:	ghc-primitive < 0.6
+Requires:	ghc-primitive >= 0.5.0.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # debuginfo is not useful for ghc
@@ -48,6 +63,11 @@ Summary:	Profiling %{pkgname} library for GHC
 Summary(pl.UTF-8):	Biblioteka profilująca %{pkgname} dla GHC
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	ghc-base-prof >= 4
+Requires:	ghc-base-prof < 5
+Requires:	ghc-deepseq-prof >= 1.1
+Requires:	ghc-deepseq-prof < 1.4
+Requires:	ghc-ghc-prim-prof
 Requires:	ghc-primitive-prof < 0.6
 Requires:	ghc-primitive-prof >= 0.5.0.1
 
