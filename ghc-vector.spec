@@ -6,40 +6,31 @@
 Summary:	Efficient Arrays
 Summary(pl.UTF-8):	Wydajne tablice
 Name:		ghc-%{pkgname}
-Version:	0.10.0.1
+Version:	0.12.1.2
 Release:	1
 License:	BSD
 Group:		Development/Languages
 #Source0Download: http://hackage.haskell.org/package/vector
 Source0:	http://hackage.haskell.org/package/%{pkgname}-%{version}/%{pkgname}-%{version}.tar.gz
-# Source0-md5:	a0d48ebfe68c8b90cb1d09589d86a79c
+# Source0-md5:	31d98b44b3a62d0ec86209ef9668bf87
 URL:		http://hackage.haskell.org/package/vector
 BuildRequires:	ghc >= 6.12.3
 BuildRequires:	ghc-base >= 4
-BuildRequires:	ghc-base < 5
 BuildRequires:	ghc-deepseq >= 1.1
-BuildRequires:	ghc-deepseq < 1.4
 BuildRequires:	ghc-ghc-prim
-BuildRequires:	ghc-primitive < 0.6
 BuildRequires:	ghc-primitive >= 0.5.0.1
 %if %{with prof}
 BuildRequires:	ghc-prof >= 6.12.3
 BuildRequires:	ghc-base-prof >= 4
-BuildRequires:	ghc-base-prof < 5
 BuildRequires:	ghc-deepseq-prof >= 1.1
-BuildRequires:	ghc-deepseq-prof < 1.4
 BuildRequires:	ghc-ghc-prim-prof
-BuildRequires:	ghc-primitive-prof < 0.6
 BuildRequires:	ghc-primitive-prof >= 0.5.0.1
 %endif
 BuildRequires:	rpmbuild(macros) >= 1.608
 %requires_eq	ghc
 Requires:	ghc-base >= 4
-Requires:	ghc-base < 5
 Requires:	ghc-deepseq >= 1.1
-Requires:	ghc-deepseq < 1.4
 Requires:	ghc-ghc-prim
-Requires:	ghc-primitive < 0.6
 Requires:	ghc-primitive >= 0.5.0.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -64,11 +55,8 @@ Summary(pl.UTF-8):	Biblioteka profilująca %{pkgname} dla GHC
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	ghc-base-prof >= 4
-Requires:	ghc-base-prof < 5
 Requires:	ghc-deepseq-prof >= 1.1
-Requires:	ghc-deepseq-prof < 1.4
 Requires:	ghc-ghc-prim-prof
-Requires:	ghc-primitive-prof < 0.6
 Requires:	ghc-primitive-prof >= 0.5.0.1
 
 %description prof
@@ -132,37 +120,55 @@ rm -rf $RPM_BUILD_ROOT
 %doc LICENSE
 %{_libdir}/%{ghcdir}/package.conf.d/%{pkgname}.conf
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}
-%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/HSvector-%{version}.o
-%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSvector-%{version}.a
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSvector-%{version}-*.so
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSvector-%{version}-*.a
+%exclude %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSvector-%{version}-*_p.a
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector.dyn_hi
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/*.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/*.dyn_hi
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Fusion
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Fusion/*.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Fusion/*.dyn_hi
+%dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Fusion/Bundle
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Fusion/Bundle/*.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Fusion/Bundle/*.dyn_hi
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Fusion/Stream
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Fusion/Stream/*.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Fusion/Stream/*.dyn_hi
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Generic
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Generic/*.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Generic/*.dyn_hi
+%dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Generic/Mutable
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Generic/Mutable/*.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Generic/Mutable/*.dyn_hi
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Internal
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Internal/*.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Internal/*.dyn_hi
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Primitive
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Primitive/*.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Primitive/*.dyn_hi
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Storable
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Storable/*.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Storable/*.dyn_hi
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Unboxed
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Unboxed/*.hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Unboxed/*.dyn_hi
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/include
 
 %if %{with prof}
 %files prof
 %defattr(644,root,root,755)
-%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSvector-%{version}_p.a
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSvector-%{version}-*_p.a
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector.p_hi
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/*.p_hi
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Fusion/*.p_hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Fusion/Bundle/*.p_hi
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Fusion/Stream/*.p_hi
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Generic/*.p_hi
+%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Generic/Mutable/*.p_hi
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Internal/*.p_hi
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Primitive/*.p_hi
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data/Vector/Storable/*.p_hi
