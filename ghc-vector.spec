@@ -7,7 +7,7 @@ Summary:	Efficient Arrays
 Summary(pl.UTF-8):	Wydajne tablice
 Name:		ghc-%{pkgname}
 Version:	0.12.1.2
-Release:	1
+Release:	2
 License:	BSD
 Group:		Development/Languages
 #Source0Download: http://hackage.haskell.org/package/vector
