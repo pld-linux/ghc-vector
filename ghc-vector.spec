@@ -14,23 +14,28 @@ Group:		Development/Languages
 Source0:	http://hackage.haskell.org/package/%{pkgname}-%{version}/%{pkgname}-%{version}.tar.gz
 # Source0-md5:	31d98b44b3a62d0ec86209ef9668bf87
 URL:		http://hackage.haskell.org/package/vector
-BuildRequires:	ghc >= 6.12.3
-BuildRequires:	ghc-base >= 4
+# for ghc<8 also ghc-fail 4.9.x, semigroups >= 0.18 < 0.20
+BuildRequires:	ghc >= 8.0
+BuildRequires:	ghc-base >= 4.5
+BuildRequires:	ghc-base < 4.15
 BuildRequires:	ghc-deepseq >= 1.1
-BuildRequires:	ghc-ghc-prim
+BuildRequires:	ghc-deepseq < 1.5
+BuildRequires:	ghc-ghc-prim >= 0.2
+BuildRequires:	ghc-ghc-prim < 0.7
 BuildRequires:	ghc-primitive >= 0.5.0.1
+BuildRequires:	ghc-primitive < 0.8
 %if %{with prof}
-BuildRequires:	ghc-prof >= 6.12.3
-BuildRequires:	ghc-base-prof >= 4
+BuildRequires:	ghc-prof >= 8.0
+BuildRequires:	ghc-base-prof >= 4.5
 BuildRequires:	ghc-deepseq-prof >= 1.1
-BuildRequires:	ghc-ghc-prim-prof
+BuildRequires:	ghc-ghc-prim-prof >= 0.2
 BuildRequires:	ghc-primitive-prof >= 0.5.0.1
 %endif
 BuildRequires:	rpmbuild(macros) >= 1.608
 %requires_eq	ghc
-Requires:	ghc-base >= 4
+Requires:	ghc-base >= 4.5
 Requires:	ghc-deepseq >= 1.1
-Requires:	ghc-ghc-prim
+Requires:	ghc-ghc-prim >= 0.2
 Requires:	ghc-primitive >= 0.5.0.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -54,9 +59,9 @@ Summary:	Profiling %{pkgname} library for GHC
 Summary(pl.UTF-8):	Biblioteka profilująca %{pkgname} dla GHC
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	ghc-base-prof >= 4
+Requires:	ghc-base-prof >= 4.5
 Requires:	ghc-deepseq-prof >= 1.1
-Requires:	ghc-ghc-prim-prof
+Requires:	ghc-ghc-prim-prof >= 0.2
 Requires:	ghc-primitive-prof >= 0.5.0.1
 
 %description prof
@@ -120,7 +125,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc LICENSE
 %{_libdir}/%{ghcdir}/package.conf.d/%{pkgname}.conf
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}
-%{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSvector-%{version}-*.so
+%attr(755,root,root) %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSvector-%{version}-*.so
 %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSvector-%{version}-*.a
 %exclude %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/libHSvector-%{version}-*_p.a
 %dir %{_libdir}/%{ghcdir}/%{pkgname}-%{version}/Data
